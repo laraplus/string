@@ -296,7 +296,7 @@ str('person')->toPlural();
 Return the length of the given string.
 ```php
 // returns 11
-str('Hello world')->length;
+str('Hello world')->length();
 ```
 
 #### words($ignore = '?!;:,.')
