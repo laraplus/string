@@ -2,14 +2,14 @@
 This package provides a fluid easy-to-use interface for string manipulation. It integrates with Illuminate\Support 
 to enable a fluid syntax even when dealing with multiple results. All methods are UTF-8 friendly.
 
-# Installation
+## Installation
 To install this package, simply require it using composer:
 
 ```
 composer require laraplus/string
 ```
 
-# Example usage
+## Example usage
 
 With this package you can avoid ugly nested str_* functions and never ending needle-haystack problems:
 ```php
@@ -46,9 +46,9 @@ foreach($lines as $line) {
 }
 ```
 
-# Full reference
+## Full reference
 
-## Initialization
+### Initialization
 
 You can initialize the ``StringBuffer`` object directly or by using the ``str`` helper function:
 ```php
@@ -59,7 +59,7 @@ $string = new Laraplus\String\StringBuffer('Hello world!');
 $string = str('Hello world!');
 ```
 
-## Chaining
+### Chaining
 
 When the result of a method call is a string, it is automatically wrapped in a new StringBuffer instance, so that the
 method calls can be chained.
@@ -86,9 +86,9 @@ str('hello world')->words()->each(function($word){
 
 For a full reference of available collection methods, see the Laravel documentation: http://laravel.com/docs/5.1/collections#available-methods
 
-## Full method reference
+### Available methods
 
-### ucfirst()
+#### ucfirst()
 
 Capitalize the first letter of the string.
 ```php
@@ -96,7 +96,7 @@ Capitalize the first letter of the string.
 str('hello world')->ucfirst();
 ```
 
-### lcfirst()
+#### lcfirst()
 
 Lowercase the first letter of the string.
 ```php
@@ -104,7 +104,7 @@ Lowercase the first letter of the string.
 str('Hello world')->lcfirst();
 ```
 
-### startsWith($needles)
+#### startsWith($needles)
 
 Determine if the string starts with a given substring.
 ```php
@@ -118,7 +118,7 @@ str('Hello world')->startsWith('world');
 str('Hello world')->startsWith(['H', 'W']);
 ```
 
-### endsWith($needles)
+#### endsWith($needles)
 
 Determine if the string ends with a given substring.
 ```php
@@ -133,7 +133,7 @@ str('Hello world')->endsWith(['o', 'd']);
 ```
 
 
-### contains($needles)
+#### contains($needles)
 Determine if the string contains a given substring.
 ```php
 // returns true
@@ -146,7 +146,7 @@ str('Hello world')->contains('universe');
 str('Hello world')->endsWith(['w', 'u']);
 ```
 
-### equals($needles)
+#### equals($needles)
 Determine if the string equals the given input in a constant time comparison.
 ```php
 // returns true
@@ -156,7 +156,7 @@ str('Hello world')->equals('Hello world');
 str('Hello world')->equals('Hello universe');
 ```
 
-### matches($pattern)
+#### matches($pattern)
 Determine if the string matches a given pattern.
 ```php
 // returns true
@@ -166,7 +166,7 @@ str('Hello/World')->matches('*/*');
 str('Hello world')->equals('Hello*');
 ```
 
-### explode($delimiters)
+#### explode($delimiters)
 Split the string with given delimiter(s).
 ```php
 // result: ['Hello', ' World']
@@ -176,7 +176,7 @@ str('Hello, World')->explode(',');
 str('one:two,three:four')->explode([':', ',']);
 ```
 
-### indexOf($needle, $offset = 0)
+#### indexOf($needle, $offset = 0)
 Find the first occurrence of a given needle in the string, starting at the provided offset.
 ```php
 // returns 0
@@ -186,7 +186,7 @@ str('one, two')->indexOf('o');
 str('one, two')->indexOf('o', 1);
 ```
 
-### lastIndexOf($needle, $offset = 0)
+#### lastIndexOf($needle, $offset = 0)
 Find the last occurrence of a given needle in the string, starting at the provided offset.
 ```php
 // returns 7
@@ -196,7 +196,7 @@ str('one, two')->lastIndexOf('o');
 str('one, two')->lastIndexOf('o', 1);
 ```
 
-### replace($search, $replace, &$count = 0)
+#### replace($search, $replace, &$count = 0)
 Replace all occurrences of the search string with the replacement string.
 ```php
 // result: 'one; two; three'
@@ -212,7 +212,7 @@ str('one, two. three')->replace([',', '.'], ';');
 str('one, two. three')->replace([',', '.'], [';', ',']);
 ```
 
-### substring($start, $length = null)
+#### substring($start, $length = null)
 Returns the portion of string specified by the start and length parameters
 ```php
 // result: 'world'
@@ -222,84 +222,84 @@ str('Hello world')->substring(6);
 str('Hello world')->substring(2, 2);
 ```
 
-### toAscii()
+#### toAscii()
 Transliterate a UTF-8 value to ASCII.
 ```php
 // result: 'CcZzSs'
 str('ČčŽžŠš')->toAscii();
 ```
 
-### toCamel()
+#### toCamel()
 Convert a value to camel case.
 ```php
 // result: 'helloWorld'
 str('hello_world')->toCamel();
 ```
 
-### toSnake()
+#### toSnake()
 Convert a value to snake case.
 ```php
 // result: 'hello_world'
 str('HelloWorld')->toSnake();
 ```
 
-### toStudly()
+#### toStudly()
 Convert a value to studly case.
 ```php
 // result: 'HelloWorld'
 str('hello_world')->toStudly();
 ```
 
-### toTitle()
+#### toTitle()
 Convert a value to title case.
 ```php
 // result: 'Hello World'
 str('hello world')->toTitle();
 ```
 
-### toSlug()
+#### toSlug()
 Convert a value to title case.
 ```php
 // result: 'hello-world'
 str('Hello world')->toSlug();
 ```
 
-### toUpper()
+#### toUpper()
 Convert the given string to upper-case.
 ```php
 // result: 'HELLO WORLD'
 str('hello world')->toUpper();
 ```
 
-### toLower()
+#### toLower()
 Convert the given string to lower-case.
 ```php
 // result: 'hello world'
 str('HELLO WORLD')->toLower();
 ```
 
-### toSingular()
+#### toSingular()
 Get the singular form of an English word.
 ```php
 // result: 'person'
 str('people')->toSingular();
 ```
 
-### toPlural()
+#### toPlural()
 Get the plural form of an English word.
 ```php
 // result: 'people'
 str('person')->toPlural();
 ```
 
-### length()
+#### length()
 Return the length of the given string.
 ```php
 // returns 11
 str('Hello world')->length;
 ```
 
-### words($ignore = '?!;:,.')
+#### words($ignore = '?!;:,.')
 Return a Collection of individual words in the string ignoring the given characters.
 ```php
 // result: ['one', 'two', 'three']
@@ -309,28 +309,28 @@ str('one, two, three')->words();
 str('(one) : (two) : (three)')->words('(:)');
 ```
 
-### lines()
+#### lines()
 Return a collection of individual lines in the string.
 ```php
 // result: ['one', 'two', 'three']
 str("one\ntwo\r\nthree")->lines();
 ```
 
-### prepend($string)
+#### prepend($string)
 Prepend a given input to the string.
 ```php
 // result: 'hello world'
 str('world')->prepend(' ')->prepend('hello');
 ```
 
-### append($string)
+#### append($string)
 Append a given input to the string.
 ```php
 // result: 'hello world'
 str('hello')->append(' ')->append('hello');
 ```
 
-### trim($chars = null)
+#### trim($chars = null)
 Trim given characters from both ends of the string. If no characters are provided, all white space is trimmed.
 ```php
 // result: 'hello world'
@@ -340,7 +340,7 @@ str('  hello world  ')->trim();
 str('--hello world--')->trim('-');
 ```
 
-### ltrim($chars = null)
+#### ltrim($chars = null)
 Similar to ``trim()``, but only trims characters from the left side.
 ```php
 // result: 'hello world  '
@@ -350,7 +350,7 @@ str('  hello world  ')->trim();
 str('--hello world--')->trim('-');
 ```
 
-### rtrim($chars = null)
+#### rtrim($chars = null)
 Similar to ``trim()``, but only trims characters from the right side.
 ```php
 // result: '  hello world'
@@ -360,7 +360,7 @@ str('  hello world  ')->trim();
 str('--hello world--')->trim('-');
 ```
 
-### limit($limit = 100, $end = '...')
+#### limit($limit = 100, $end = '...')
 Limit the number of characters in the string.
 ```php
 // result: 'hello...'
@@ -373,7 +373,7 @@ str('hello world')->limit(5, 'etc.');
 str('hello world')->limit();
 ```
 
-### limitWords($limit = 100, $end = '...')
+#### limitWords($limit = 100, $end = '...')
 Limit the number of words in the string.
 ```php
 // result: 'hello the world...'
@@ -386,14 +386,14 @@ str('Hello the world of PHP!')->limit(5, 'etc.');
 str('Hello the world of PHP!')->limit();
 ```
 
-### wordAt($index)
+#### wordAt($index)
 Return the word at the given index.
 ```php
 // result: 'world'
 str('Hello the world of PHP!')->wordAt(2);
 ```
 
-## Using offsets
+### Using offsets
 Since the StringBuffer class implements the ArrayAccess interface, you can also use all of the usual offset goodies:
 ```php
 $string = str('hello world');
