@@ -64,7 +64,7 @@ $string = str('Hello world!');
 When the result of a method call is a string, it is automatically wrapped in a new StringBuffer instance, so that the
 method calls can be chained.
 ```php
-// result: "Hello world"
+// result: "HELLO"
 str('hello world')->toUpper()->wordAt(1);
 ```
 
