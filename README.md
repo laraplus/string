@@ -65,7 +65,7 @@ When the result of a method call is a string, it is automatically wrapped in a n
 method calls can be chained.
 ```php
 // result: "HELLO"
-str('hello world')->toUpper()->wordAt(1);
+str('hello world')->toUpper()->wordAt(0);
 ```
 
 If you need to unwrap the object, you can do that by calling the ``get()`` method or simply cast it to string.
