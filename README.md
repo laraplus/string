@@ -396,7 +396,7 @@ str('Hello the world of PHP!')->wordAt(2);
 #### tree($open = '{', $close = '}')
 Parse a tree structure defined by the given delimiters.
 ```php
-//result: ['one', ['two', ['three'], 'four']
+//result: ['one', ['two', ['three'], 'four']]
 str('one{two{three}four}')->tree();
 ```
 
