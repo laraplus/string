@@ -186,6 +186,24 @@ class SupportStringBufferTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('hello...', (new StringBuffer('hello world'))->limit(5)->get());
         $this->assertEquals('hello...', (new StringBuffer('hello world'))->limitWords(1)->get());
     }
+
+    public function testTree()
+    {
+        $source = new StringBuffer('function a(){test();if(1){test1();}else{test2();}}');
+        $expected = ['function a()', ['test();if(1)', ['test1();'], 'else', ['test2();']]];
+
+        $this->assertEquals($expected, $source->treeArray());
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testInvalidTree()
+    {
+        $source = new StringBuffer('function a(){test();if(1){{test1();}else{test2();}}');
+
+        $source->tree();
+    }
 }
 
 class TestToStringObject

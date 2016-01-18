@@ -1,6 +1,7 @@
 <?php namespace Laraplus\String;
 
 use ArrayAccess;
+use Exception;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Illuminate\Support\Collection;
@@ -343,6 +344,66 @@ class StringBuffer implements ArrayAccess
         $lines = preg_split('/\r\n|\n|\r/', $this->string);
 
         return (new Collection($lines));
+    }
+
+    /**
+     * Parse a tree structure defined by the given delimiters.
+     *
+     * @param  string $open
+     * @param  string $close
+     * @return array
+     * @throws Exception
+     */
+    public function tree($open = '{', $close = '}')
+    {
+        return (new Collection($this->treeArray($open, $close)));
+    }
+
+    /**
+     * Parse a tree structure defined by the given delimiters.
+     *
+     * @param  string $open
+     * @param  string $close
+     * @return array
+     * @throws Exception
+     */
+    public function treeArray($open = '{', $close = '}')
+    {
+        // We will look for the first occurrence of opening delimiter
+        // in the string. If no delimiter is found, we will return
+        // immediately with the original string wrapped in array.
+        if(!($start = $pos = strpos($this->string, $open))) {
+            return [$this->string];
+        }
+
+        $level = 1;
+        $end = null;
+
+        // Then we will loop through the string char by char, checking
+        // each one for the closing delimiter. We also need to track
+        // the nesting level so that we don't return too quickly.
+        while(!$end) {
+            if(++$pos >= strlen($this->string)) {
+                throw new Exception('Invalid string format.');
+            }
+
+            $char = $this->string[$pos];
+
+            if($char == $open) $level++;
+            if($char == $close) $level--;
+            if($level == 0) $end = $pos;
+        }
+
+        // When we have both delimiters, we can slice the string into
+        // three parts. We can leave the first part as it is, but
+        // we must make recursive calls on the other two parts.
+        $first = substr($this->string, 0, $start);
+        $middle = new static (substr($this->string, $start + 1, $end - $start - 1));
+        $last = new static (substr($this->string, $end + 1));
+
+        return array_filter(array_merge(
+            [$first, $middle->treeArray($open, $close)], $last->treeArray($open, $close)
+        ));
     }
 
     /**

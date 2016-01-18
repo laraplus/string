@@ -393,6 +393,13 @@ Return the word at the given index.
 str('Hello the world of PHP!')->wordAt(2);
 ```
 
+#### tree($open = '{', $close = '}')
+Parse a tree structure defined by the given delimiters.
+```php
+//result: ['one', ['two', ['three'], 'four']
+str('one{two{three}four}')->tree();
+```
+
 ### Using offsets
 Since the StringBuffer class implements the ArrayAccess interface, you can also use all of the usual offset goodies:
 ```php
