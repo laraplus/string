@@ -1,6 +1,6 @@
 # Laraplus/String
-This package provides a fluid easy-to-use interface for string manipulation. It integrates with Illuminate\Support 
-to enable a fluid syntax even when dealing with multiple results. All methods are UTF-8 friendly.
+This package provides a fluent easy-to-use interface for string manipulation. It integrates with Illuminate\Support 
+to enable a fluent syntax even when dealing with multiple results. All methods are UTF-8 friendly.
 
 ## Installation
 To install this package, simply require it using composer:
@@ -80,7 +80,7 @@ When a method returns an array it is automatically wrapped in a Collection objec
 ```php
 str('hello world')->words()->each(function($word){
  // Be careful, $word is just a plain string here.
- // To convert it to StringBuffer again, call: str($word)
+ // To convert it to StringBuffer again just call: str($word)
 });
 ```
 
@@ -143,7 +143,7 @@ str('Hello world')->contains('world');
 str('Hello world')->contains('universe');
 
 // returns true
-str('Hello world')->endsWith(['w', 'u']);
+str('Hello world')->contains(['w', 'u']);
 ```
 
 #### equals($needles)
@@ -268,14 +268,14 @@ str('Hello world')->toSlug();
 Convert the given string to upper-case.
 ```php
 // result: 'HELLO WORLD'
-str('hello world')->toUpper();
+str('Hello world')->toUpper();
 ```
 
 #### toLower()
 Convert the given string to lower-case.
 ```php
 // result: 'hello world'
-str('HELLO WORLD')->toLower();
+str('Hello World')->toLower();
 ```
 
 #### toSingular()
@@ -327,7 +327,7 @@ str('world')->prepend(' ')->prepend('hello');
 Append a given input to the string.
 ```php
 // result: 'hello world'
-str('hello')->append(' ')->append('hello');
+str('hello')->append(' ')->append('world');
 ```
 
 #### trim($chars = null)
@@ -344,20 +344,20 @@ str('--hello world--')->trim('-');
 Similar to ``trim()``, but only trims characters from the left side.
 ```php
 // result: 'hello world  '
-str('  hello world  ')->trim();
+str('  hello world  ')->ltrim();
 
 // result: 'hello world--'
-str('--hello world--')->trim('-');
+str('--hello world--')->ltrim('-');
 ```
 
 #### rtrim($chars = null)
 Similar to ``trim()``, but only trims characters from the right side.
 ```php
 // result: '  hello world'
-str('  hello world  ')->trim();
+str('  hello world  ')->rtrim();
 
 // result: '--hello world'
-str('--hello world--')->trim('-');
+str('--hello world--')->rtrim('-');
 ```
 
 #### limit($limit = 100, $end = '...')
@@ -367,10 +367,7 @@ Limit the number of characters in the string.
 str('hello world')->limit(5);
 
 // result: 'hello etc.'
-str('hello world')->limit(5, 'etc.');
-
-// result: 'hello world'
-str('hello world')->limit();
+str('hello world')->limit(5, ' etc.');
 ```
 
 #### limitWords($limit = 100, $end = '...')
@@ -380,10 +377,7 @@ Limit the number of words in the string.
 str('Hello the world of PHP!')->limitWords(3);
 
 // result: 'hello the world etc.'
-str('Hello the world of PHP!')->limit(5, 'etc.');
-
-// result: 'Hello the world of PHP!'
-str('Hello the world of PHP!')->limit();
+str('Hello the world of PHP!')->limitWords(3, ' etc.');
 ```
 
 #### wordAt($index)
