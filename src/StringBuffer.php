@@ -124,16 +124,17 @@ class StringBuffer implements ArrayAccess
     /**
      * Split the string with a given delimiter.
      *
-     * @param  string|array  $delimiters
-     * @return \Illuminate\Support\Collection
+     * @param  string|array $delimiters
+     * @param  int $limit
+     * @return Collection
      */
-    public function explode($delimiters)
+    public function explode($delimiters, $limit = -1)
     {
         $delimiters = array_map(function ($delimiter) {
             return preg_quote($delimiter, '/');
         }, (array) $delimiters);
 
-        $strings = preg_split('/('.implode('|', $delimiters).')/', $this->string);
+        $strings = preg_split('/('.implode('|', $delimiters).')/', $this->string, $limit);
 
         return collect($strings);
     }
