@@ -8,7 +8,7 @@ if (! function_exists('str')) {
      *
      * @param  mixed  $value
      * @param  string  $encoding
-     * @return \Illuminate\Support\StringBuffer
+     * @return \Laraplus\String\StringBuffer
      */
     function str($value, $encoding = 'UTF-8')
     {
